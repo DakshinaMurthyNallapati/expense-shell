@@ -38,16 +38,13 @@ echo "Script started executing at : $TIMESTAMP" &>>$LOG_FILE_NAME
 CHECK_ROOT
 
 dnf install mysql-server -y &>>$LOG_FILE_NAME
-echo "MySQL-server installation started at : $TIMESTAMP"
 VALIDATE $? "Installing MySQL Server"
-echo "MySQL-server installation Completed at : $TIMESTAMP"
+
 
 systemctl enable mysqld
-echo "Enabling MySQL Server started at : $TIMESTAMP"
 VALIDATE $? "Enabling MySQL Server"
 
 systemctl start mysqld
-echo "MySQL Server starting : $TIMESTAMP"
 VALIDATE $? "Starting MySQL Server"
 
 mysql -h mysql.dakshina.cloud -u root -pExpenseApp@1 -e 'show databases;' &>>$LOG_FILE_NAME
