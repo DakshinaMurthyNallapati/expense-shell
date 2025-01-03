@@ -38,15 +38,19 @@ echo "Script started executing at : $TIMESTAMP"
 CHECK_ROOT
 
 dnf install mysql-server -y &>>$LOG_FILE_NAME
+echo "MySQL-server installation started at : $TIMESTAMP"
 VALIDATE $? "Installing MySQL Server"
 
 systemctl enable mysqld
+echo "Enabling MySQL Server started at : $TIMESTAMP"
 VALIDATE $? "Enabling MySQL Server"
 
 systemctl start mysqld
+echo "MySQL Server starting : $TIMESTAMP"
 VALIDATE $? "Starting MySQL Server"
 
 mysql_secure_installation --set-root-pass ExpenseApp@1
+echo "Started setting root password at : $TIMESTAMP"
 VALIDATE $? "Setting root password"
 
 echo "Script execution completed at : $TIMESTAMP"
