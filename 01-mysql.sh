@@ -40,6 +40,7 @@ CHECK_ROOT
 dnf install mysql-server -y &>>$LOG_FILE_NAME
 echo "MySQL-server installation started at : $TIMESTAMP"
 VALIDATE $? "Installing MySQL Server"
+echo "MySQL-server installation Completed at : $TIMESTAMP"
 
 systemctl enable mysqld
 echo "Enabling MySQL Server started at : $TIMESTAMP"
