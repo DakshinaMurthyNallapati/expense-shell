@@ -33,7 +33,7 @@ CHECK_ROOT(){
     }
 
 echo "Script started executing at : $TIMESTAMP" &>>$LOG_FILE_NAME
-echo "Script started executing at : $TIMESTAMP"
+
 
 CHECK_ROOT
 
@@ -49,9 +49,16 @@ systemctl start mysqld
 echo "MySQL Server starting : $TIMESTAMP"
 VALIDATE $? "Starting MySQL Server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
-echo "Started setting root password at : $TIMESTAMP"
-VALIDATE $? "Setting root password"
+mysql -h mysql.dakshina.cloud -u root -pExpenseApp@1 -e 'show databases;' &>>$LOG_FILE_NAME
 
-echo "Script execution completed at : $TIMESTAMP"
+if [ $? ne 0 ]
+    then
+        echo "MySql root password not setup" &>>$LOG_FILE_NAME
+        mysql_secure_installation --set-root-pass ExpenseApp@1
+        VALIDATE $? "Setting root password"
+    else 
+        echo -e "MySQL Root password already setup.... $Y SKIPPING $N"
+fi
+
+
 
