@@ -33,6 +33,7 @@ CHECK_ROOT(){
     }
 
 echo "Script started executing at : $TIMESTAMP" &>>$LOG_FILE_NAME
+echo "Script started executing at : $TIMESTAMP"
 
 CHECK_ROOT
 
@@ -47,4 +48,6 @@ VALIDATE $? "Starting MySQL Server"
 
 mysql_secure_installation --set-root-pass ExpenseApp@1
 VALIDATE $? "Setting root password"
+
+echo "Script execution completed at : $TIMESTAMP"
 
